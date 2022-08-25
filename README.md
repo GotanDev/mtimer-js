@@ -19,8 +19,8 @@ Each items has the following structure:
 {
     id: Number,
     type: 'interval'|'timeout',
-    functionName: string,
-    delay: number,
+    functionName: String,
+    delay: Number,
     startTime: Date
 }
 ```
@@ -39,4 +39,4 @@ Each items has the following structure:
 
 ## Licence 
 
-MIT
+[MIT](https://opensource.org/licenses/MIT)
