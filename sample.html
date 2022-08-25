@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>mtimer-js sample</title>
+	<style>
+		#console{
+			position: fixed; top:  0; right:  0;
+			width: 350px;
+			padding:  10px;
+			height:  100%;
+			background-color: #FAFAFA;
+			font-family:  monospace;
+			white-space: pre-line;
+			font-size:  8pt;
+			box-sizing:  border-box;
+		}
+		#test {
+			font-size:  20pt;
+			color: #1C2B50;
+			text-align: center;
+			margin:  20px 350px 0 0 ;
+
+			background-color:#1C2B50;
+			color: #FFF;
+			padding:  20px;
+
+		}
+		.buttons{
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			display: flex;
+		}
+	</style>
+</head>
+<body>
+	<div id="test">My Test</div>
+	<div id="console"></div>
+	<div class="buttons">
+		<button id="avoid">Avoid stop</button>
+		<button id="stop">Stop immediatly</button>
+	</div>
+<body>
+<script type="text/javascript" src="mtimer.js"></script>
+
+<script type="text/javascript">
+counter = 0;
+function change(id) {
+  document.getElementById(id).innerText = "" + (++counter);
+
+  let message = (new Date()).toISOString() + ": " + window.timers.length + " active timers.\n";
+  message += '  [' + window.timers.map(t => t.functionName).join(",") + ']';
+  document.getElementById("console").innerText += message + "\n";
+}
+setInterval(change, 1000, 'test')
+setTimeout(function stop(){
+  window.clearTimers('interval');
+	document.querySelectorAll('button').forEach(b => {b.disabled = true;} ); 
+}, 10500);
+
+document.getElementById('avoid').onclick = function(){
+	clearTimer(window.timers.filter(t=>t.functionName == 'stop')[0].id)
+	this.remove();
+}
+document.getElementById('stop').onclick = function(){
+	clearTimer(window.timers.filter(t=>t.functionName == 'change')[0].id)
+}
+</script>
+</html>

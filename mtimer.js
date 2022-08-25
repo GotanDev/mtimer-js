@@ -137,7 +137,7 @@ window.clearTimers = function (type) {
     if (type == null) {
         timers = window.timers;
     } else {
-        timers = window.timers.filters(t => t.type === type);
+        timers = window.timers.filter(t => t.type === type);
     }
     const count = timers.length;
     timers.forEach(t => window.clearTimer(t.id));
