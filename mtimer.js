@@ -3,6 +3,10 @@
  * Override global JS functions setTimeout() & setInterval()
  * to allow management task on them
  *
+ * @author Damien Cuvillier <damien@gotan.io>
+ * @License MIT
+ *
+ * Feel free to thanks: https://tinyurl.com/2kh78j52
  * */
 
 // Overriding originals
