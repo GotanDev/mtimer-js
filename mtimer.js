@@ -53,7 +53,7 @@ class Timer{
  * @returns number timeoutId of created timeout
  */
 window.setTimeout = function(callbackFunction, delay, ...args) {
-    let cmd = 'window.originalSetTimeout(func,delay'
+    let cmd = 'window.originalSetTimeout(callbackFunction,delay'
     for (let i = 0; i < arguments.length ; i ++) {
         cmd += ", args[" + i + "]";
     }
@@ -78,9 +78,9 @@ window.setTimeout = function(callbackFunction, delay, ...args) {
  * @returns number intervalId of created interval
  */
 window.setInterval = function(callbackFunction, delay, ...args) {
-    let cmd = 'window.originalSetInterval(func,delay'
+    let cmd = 'window.originalSetInterval(callbackFunction,delay'
     for (let i = 0; i < args.length ; i ++) {
-        cmd += ", arguments[" + i + "]";
+        cmd += ", args[" + i + "]";
     }
     cmd += ');';
     /* We use deprecated eval syntax to deal with ...arguments syntax

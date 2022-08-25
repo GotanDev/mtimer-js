@@ -4,6 +4,7 @@
   "description": "Managed Timers (interval & timemout) for Javascript",
   "main": "mtimer.js",
   "scripts": {
+    "build": "javascript-obfuscator mtimer.js --output mtimer.min.js --compact false --rename-globals false --rename-properties false --source-map true --reserved-names window --identifier-names-generator 'mangled-shuffled' --rename-properties-mode 'safe' ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/GotanDev/mtimer-js/issues"
   },
-  "homepage": "https://github.com/GotanDev/mtimer-js#readme"
+  "homepage": "https://github.com/GotanDev/mtimer-js#readme",
+  "devDependencies": {
+    "javascript-obfuscator": "^4.0.0"
+  }
 }
