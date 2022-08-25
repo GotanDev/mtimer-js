@@ -1,0 +1,24 @@
+{
+  "name": "mtimer-js",
+  "version": "1.0.0",
+  "description": "Managed Timers (interval & timemout) for Javascript",
+  "main": "mtimer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GotanDev/mtimer-js.git"
+  },
+  "keywords": [
+    "timeout",
+    "javascript",
+    "interval"
+  ],
+  "author": "Damien Cuvillier <damien@gotan.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GotanDev/mtimer-js/issues"
+  },
+  "homepage": "https://github.com/GotanDev/mtimer-js#readme"
+}

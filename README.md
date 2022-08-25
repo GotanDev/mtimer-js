@@ -9,6 +9,14 @@ Allows to list, stop, clear any launched timer.
 
 ## Setup
 
+* NPM  
+```bash
+npm i mtimer-js
+```
+* Bower  
+```bash
+bower install --save git@github.com:GotanDev/mtimer-js.git
+```
 
 ## Documentation
 
