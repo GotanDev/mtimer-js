@@ -1,3 +1,4 @@
+'use strict'
 /** Timer manager.
  *
  * Override global JS functions setTimeout() & setInterval()
@@ -33,9 +34,6 @@ window.timers = [];
 /** Generic Timer (interval ou timeout representation */
 class Timer{
     constructor (id, type, functionName, delay) {
-        if (type === 'interval' || (type === 'timeout' && delay != null && delay > 0)) {
-            logger.debug('New ' + type + ' ' + functionName + ' (' + delay + 'ms): ' + id);
-        }
         this.id = id;
         this.type = type;
         this.functionName = functionName;
@@ -51,19 +49,19 @@ class Timer{
  *
  * @param callbackFunction Function to callback after delay
  * @param delay Delay in ms
- * @param arguments As many arguments as your need
+ * @param args As many arguments as your need
  * @returns number timeoutId of created timeout
  */
-window.setTimeout = function(callbackFunction, delay, ...arguments) {
-    cmd = 'window.originalSetTimeout(func,delay'
+window.setTimeout = function(callbackFunction, delay, ...args) {
+    let cmd = 'window.originalSetTimeout(func,delay'
     for (let i = 0; i < arguments.length ; i ++) {
-        cmd += ", arguments[" + i + "]";
+        cmd += ", args[" + i + "]";
     }
     cmd += ');';
     /* We use deprecated eval syntax to deal with ...arguments syntax
      * Otherwise, it sends an args[] array.
      */
-    id = eval (cmd);
+    const id = eval (cmd);
 
     window.originalSetTimeout(clearTimer, delay, id);
     window.timers.push(new Timer(id, 'timeout', callbackFunction.name, delay));
@@ -76,19 +74,19 @@ window.setTimeout = function(callbackFunction, delay, ...arguments) {
  *
  * @param callbackFunction
  * @param delay Delay in ms
- * @param arguments As many arguments as your need
+ * @param args As many arguments as your need
  * @returns number intervalId of created interval
  */
-window.setInterval = function(callbackFunction, delay, ...arguments) {
-    cmd = 'window.originalSetInterval(func,delay'
-    for (let i = 0; i < arguments.length ; i ++) {
+window.setInterval = function(callbackFunction, delay, ...args) {
+    let cmd = 'window.originalSetInterval(func,delay'
+    for (let i = 0; i < args.length ; i ++) {
         cmd += ", arguments[" + i + "]";
     }
     cmd += ');';
     /* We use deprecated eval syntax to deal with ...arguments syntax
     * Otherwise, it sends an args[] array.
     */
-    id = eval(cmd);
+    const id = eval(cmd);
     window.timers.push(new Timer(id, 'interval', callbackFunction.name, delay));
     return id;
 };
@@ -122,7 +120,7 @@ window.clearTimer = function(timerId)  {
         } else if (searchTimer[0].type === 'interval') {
             window.originalClearInterval(searchTimer[0].id);
         }
-        idx = window.timers.indexOf(searchTimer[0]);
+        const idx = window.timers.indexOf(searchTimer[0]);
         window.timers.splice(idx,1);
     }
 };
@@ -135,12 +133,13 @@ window.clearTimer = function(timerId)  {
  * @returns number how many timers have been erased
  */
 window.clearTimers = function (type) {
+    let timers;
     if (type == null) {
         timers = window.timers;
     } else {
         timers = window.timers.filters(t => t.type === type);
     }
-    const count = timers.length
+    const count = timers.length;
     timers.forEach(t => window.clearTimer(t.id));
     return count;
 };
